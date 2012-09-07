@@ -8,13 +8,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.n52.wps</groupId>
 	<artifactId>52n-xml-wps-v100</artifactId>
-	<version>1.1.0</version>
+	<version>1.1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>OGC WPS schema (spec. v1.0.0)</name>
 	<scm>
-		<connection>scm:svn:https://svn.52north.org/svn/geoprocessing/main/52n-xml-wps-v100/tags/52n-xml-wps-v100-1.1.0</connection>
-		<developerConnection>scm:svn:https://svn.52north.org/svn/geoprocessing/main/52n-xml-wps-v100/tags/52n-xml-wps-v100-1.1.0</developerConnection>
-		<url>https://svn.52north.org/cgi-bin/viewvc.cgi/main/52n-xml-wps-v100/tags/52n-xml-wps-v100-1.1.0?root=geoprocessing</url>
+		<connection>scm:svn:https://svn.52north.org/svn/geoprocessing/main/52n-xml-wps-v100/trunk/</connection>
+		<developerConnection>scm:svn:https://svn.52north.org/svn/geoprocessing/main/52n-xml-wps-v100/trunk/</developerConnection>
+		<url>https://svn.52north.org/cgi-bin/viewvc.cgi/main/52n-xml-wps-v100/trunk/?root=geoprocessing</url>
 	</scm>
 	<build>
 		<plugins>
