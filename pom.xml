@@ -1,5 +1,36 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<!--
+
+    ﻿Copyright (C) 2012 - 2014 52°North Initiative for Geospatial Open Source
+    Software GmbH
+
+    This program is free software; you can redistribute it and/or modify it
+    under the terms of the GNU General Public License version 2 as published
+    by the Free Software Foundation.
+
+    If the program is linked with libraries which are licensed under one of
+    the following licenses, the combination of the program with the linked
+    library is not considered a "derivative work" of the program:
+
+          • Apache License, version 2.0
+          • Apache Software License, version 1.0
+          • GNU Lesser General Public License, version 3
+          • Mozilla Public License, versions 1.0, 1.1 and 2.0
+          • Common Development and Distribution License (CDDL), version 1.0
+
+    Therefore the distribution of the program linked with libraries licensed
+    under the aforementioned licenses, is permitted by the copyright holders
+    if the distribution is compliant with both the GNU General Public
+    License version 2 and the aforementioned licenses.
+
+    This program is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+    Public License for more details.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<groupId>org.n52.sensorweb</groupId>
 		<artifactId>52n-common-xml</artifactId>
@@ -11,10 +42,17 @@
 	<version>1.1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>OGC WPS schema (spec. v1.0.0)</name>
+	<licenses>
+		<license>
+			<name>GNU GENERAL PUBLIC LICENSE Version 2, June 1991</name>
+			<url>http://www.gnu.org/licenses/gpl-2.0.txt</url>
+		</license>
+	</licenses>
+	<inceptionYear>2012</inceptionYear>
 	<scm>
-		<connection>scm:svn:https://svn.52north.org/svn/geoprocessing/main/52n-xml-wps-v100/trunk/</connection>
-		<developerConnection>scm:svn:https://svn.52north.org/svn/geoprocessing/main/52n-xml-wps-v100/trunk/</developerConnection>
-		<url>https://svn.52north.org/cgi-bin/viewvc.cgi/main/52n-xml-wps-v100/trunk/?root=geoprocessing</url>
+		<connection>scm:git:git://github.com/52North/xml-wps-v100.git</connection>
+		<url>https://github.com/52North/xml-wps-v100</url>
+		<developerConnection>scm:git:ssh://git@github.com/52North/xml-wps-v100.git</developerConnection>
 	</scm>
 	<build>
 		<plugins>
@@ -26,6 +64,38 @@
 						<sourceSchema>wps/1.0.0/wpsAll.xsd</sourceSchema>
 					</sourceSchemas>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jasig.maven</groupId>
+				<artifactId>maven-notice-plugin</artifactId>
+				<version>1.0.5</version>
+				<configuration>
+					<noticeTemplate>misc/NOTICE.template</noticeTemplate>
+					<licenseMapping>
+						<param>http://52north.github.io/cdn/licenses/license-mappings.xml</param>
+					</licenseMapping>
+					<generateChildNotices>false</generateChildNotices>
+				</configuration>
+				<executions>
+					<execution>
+						<id>check-notice</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -60,6 +130,66 @@
 							<preparationGoals>clean</preparationGoals>
 							<tag>52n-xml-wps-v100-${project.rel.org.n52.wps:52n-xml-wps-v100}</tag>
 						</configuration>
+					</plugin>
+				</plugins>
+				<pluginManagement>
+					<plugins>
+						<!--This plugin's configuration is used to store Eclipse m2e settings 
+							only. It has no influence on the Maven build itself. -->
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>1.0.0</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>
+													org.jasig.maven
+												</groupId>
+												<artifactId>
+													maven-notice-plugin
+												</artifactId>
+												<versionRange>
+													[1.0.5,)
+												</versionRange>
+												<goals>
+													<goal>check</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore></ignore>
+											</action>
+										</pluginExecution>
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+		<profile>
+			<id>create-license-list</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>license-maven-plugin</artifactId>
+						<version>1.5</version>
+						<configuration>
+							<useMissingFile>true</useMissingFile>
+						</configuration>
+						<executions>
+							<execution>
+								<id>create-license-list</id>
+								<goals>
+									<goal>aggregate-add-third-party</goal>
+								</goals>
+								<phase>generate-resources</phase>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>
